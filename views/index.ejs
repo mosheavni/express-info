@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Express Debug</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+</head>
+<body>
+  <div style="margin:100px;">
+    <div class="row">
+      <div class="jumbotron"  style="padding:40px;">
+        <h2>Hello, world!</h2>
+        <h3><%= process.env.MESSAGE %></h3>
+        <p>Hostname: <%= process.env.HOSTNAME %></p>
+        <dl>
+          <% for (let key in descriptions) { %>
+          <dt><%= key %></dt>
+          <dd><%= descriptions[key] %></dd>
+          <br>
+          <% } %>
+        </dl>
+        <h3>Query Params</h3>
+        <ul>
+          <% for (let key in queryParams) { %>
+          <li class="list-item">          
+            <%= key %>: <%= queryParams[key] %>
+          </li>  
+          <% } %>
+        </ul>
+      </div> 
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Headers</h3>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let key in headers) { %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= headers[key] %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </body>
+  </html>
