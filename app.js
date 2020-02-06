@@ -31,13 +31,30 @@ app.get('*', (req, res) => {
             "Original URL": req.originalUrl,
             "Base URL": req.baseUrl || "no data",
             "Req Path": req.path,
-            "IP (remote address)": req.connection.remoteAddress
+            "IP (remote address)": req.connection.remoteAddress,
+            "Method:" req.method
         },
         queryParams: req.query,
         headers: req.headers
     }
     );
-}
-)
+})
+
+app.post('*', (req, res) => {
+    return res.render('index', {
+        process,
+        descriptions: {
+            "Original URL": req.originalUrl,
+            "Base URL": req.baseUrl || "no data",
+            "Req Path": req.path,
+            "IP (remote address)": req.connection.remoteAddress,
+            "Method:" req.method
+        },
+        queryParams: req.query,
+        headers: req.headers
+    }
+    );
+})
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
