@@ -1,5 +1,7 @@
 FROM node:8
 
+ENV PORT=${PORT:-3000}
+
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -15,5 +17,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 3000
+EXPOSE ${PORT}
 CMD [ "npm", "start" ]

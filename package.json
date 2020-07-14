@@ -1,6 +1,6 @@
 {
   "name": "express-demo",
-  "version": "15.0.0",
+  "version": "20.0.0",
   "description": "Express application to debug a request",
   "main": "app.js",
   "scripts": {

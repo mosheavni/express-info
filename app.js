@@ -32,7 +32,7 @@ app.get('*', (req, res) => {
             "Base URL": req.baseUrl || "no data",
             "Req Path": req.path,
             "IP (remote address)": req.connection.remoteAddress,
-            "Method:" req.method
+            "Method": req.method
         },
         queryParams: req.query,
         headers: req.headers
@@ -48,7 +48,7 @@ app.post('*', (req, res) => {
             "Base URL": req.baseUrl || "no data",
             "Req Path": req.path,
             "IP (remote address)": req.connection.remoteAddress,
-            "Method:" req.method
+            "Method": req.method
         },
         queryParams: req.query,
         headers: req.headers
