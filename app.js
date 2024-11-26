@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const express = require("express");
 const favicon = require("serve-favicon");
+const os = require("os");
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -31,6 +32,7 @@ app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 app.get("/api", (req, res) => {
   return res.json({
+    hostname: os.hostname(),
     originalUrL: req.originalUrl,
     baseUrl: req.baseUrl || "no data",
     path: req.path,
