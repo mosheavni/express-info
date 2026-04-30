@@ -1,42 +1,28 @@
 const morgan = require("morgan");
 const path = require("path");
-const bodyParser = require("body-parser");
 const express = require("express");
-const favicon = require("serve-favicon");
 const os = require("os");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// set path for static assets
 app.use(express.static(path.join(__dirname, "public")));
-
-// Body parser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-// Logger
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(morgan("dev"));
 
-// Trust proxy
-app.set("trust proxy", (ip) => {
-  console.log(ip);
-  return true;
-});
-
-// Favicon
-app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+app.set("trust proxy", () => true);
 
 app.get("/api", (req, res) => {
-  return res.json({
+  res.json({
     hostname: os.hostname(),
-    originalUrL: req.originalUrl,
+    originalUrl: req.originalUrl,
     baseUrl: req.baseUrl || "no data",
     path: req.path,
-    connection: { remoteAddress: req.connection.remoteAddress },
+    ip: req.ip,
     method: req.method,
     protocol: req.protocol,
     query: req.query,
@@ -44,14 +30,14 @@ app.get("/api", (req, res) => {
   });
 });
 
-app.get("*", (req, res) => {
-  return res.render("index", {
+app.all("*", (req, res) => {
+  res.render("index", {
     process,
     descriptions: {
       "Original URL": req.originalUrl,
       "Base URL": req.baseUrl || "no data",
       "Req Path": req.path,
-      "IP (remote address)": req.connection.remoteAddress,
+      "IP": req.ip,
       Method: req.method,
       Protocol: req.protocol,
     },
@@ -60,19 +46,4 @@ app.get("*", (req, res) => {
   });
 });
 
-app.post("*", (req, res) => {
-  return res.render("index", {
-    process,
-    descriptions: {
-      "Original URL": req.originalUrl,
-      "Base URL": req.baseUrl || "no data",
-      "Req Path": req.path,
-      "IP (remote address)": req.connection.remoteAddress,
-      Method: req.method,
-    },
-    queryParams: req.query,
-    headers: req.headers,
-  });
-});
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}`));

@@ -4,20 +4,17 @@
   "description": "Express application to debug a request",
   "main": "app.js",
   "scripts": {
-    "start": "npm install && node app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "ejs": "^2.7.4",
-    "express": "4.17.1",
-    "morgan": "^1.9.1",
-    "serve-favicon": "^2.5.0"
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^3.1.9"
   }
 }
